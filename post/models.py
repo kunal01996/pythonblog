@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 
 # Create your models here.
 
@@ -17,6 +19,9 @@ class Post(models.Model):
     created_at =  models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.BooleanField(default=True)
+
+    def get_absolute_url(self):
+        return reverse('post_detail', arg=[str(self.id)])
 
     def __str__(self):
         return self.title
